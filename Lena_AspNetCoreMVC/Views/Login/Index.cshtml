@@ -1,0 +1,56 @@
+﻿@using Application.Login.Requests;
+
+@model LoginRequest
+
+@{
+    Layout = "~/Views/Shared/_loginLayout.cshtml";
+    ViewData["Title"] = $"Login";
+}
+
+<div class="login-box">
+    <div class="card card-outline">
+        <div class="card-header text-center">
+            <a href="@Url.Action("Index","Home")" class="h1"><b>Main</b>Website</a>
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg">Sign in to start your session</p>
+            <form action="@Url.Action("LoginVerify","Login")" id="LoginForm" method="post" novalidate="novalidate" data-ajax-update="#result" data-ajax="true">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="LoginUsername" name="Username" placeholder="Username or Email" required="">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="LoginPassword" name="password" placeholder="Password" required="">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex flex-column flex-md-row justify-content-between mb-3">
+                    <div>
+                        <input type="checkbox" id="rememberMe" name="RememberMe">
+                        <label for="rememberMe">Remember Me</label>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat mx-auto w-50 rounded">Sign In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/login/login.js" asp-append-version="true"></script>
+}

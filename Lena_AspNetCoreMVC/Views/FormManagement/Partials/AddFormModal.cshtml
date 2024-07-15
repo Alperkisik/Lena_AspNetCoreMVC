@@ -1,0 +1,69 @@
+﻿@using Domain.Dtos;
+
+@model Form
+
+<div class="modal fade" id="form-create-modal">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <form asp-action="AddForm" asp-controller="FormManagement" method="post" id="add-modal-form">
+                <div class="modal-header">
+                    <h2 class="modal-title">Add New Modal</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="CreatedAt" />
+                    <input type="hidden" asp-for="CreatedBy" />
+                    <div class="mb-3 pb-3 border-bottom border-dark">
+                        <h2>Form Informations</h2>
+                        <div class="mb-3">
+                            <label class="fw-bold">Name:</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <label class="fw-bold">Description:</label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <h2>Form Fields</h2>
+                        @for (int i = 0; i < Model.Fields.Count(); i++)
+                        {
+                            <div class="mb-3 pb-3 border-bottom border-dark">
+                                <h3>Field @(i + 1)</h3>
+                                <input type="hidden" asp-for="Fields[i].Id" />
+
+                                <div class="form-group mb-3">
+                                    <label asp-for="Fields[i].Name" class="fw-bold"></label>
+                                    <input asp-for="Fields[i].Name" class="form-control" />
+                                    <span asp-validation-for="Fields[i].Name" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label asp-for="Fields[i].Required" class="fw-bold"></label>
+                                    <input asp-for="Fields[i].Required" class="form-check-input" type="checkbox" />
+                                    <span asp-validation-for="Fields[i].Required" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="Fields[i].DataType" class="fw-bold"></label>
+                                    <input asp-for="Fields[i].DataType" class="form-control" />
+                                    <span asp-validation-for="Fields[i].DataType" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
